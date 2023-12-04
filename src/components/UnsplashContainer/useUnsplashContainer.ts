@@ -9,7 +9,7 @@ type UnsplashPhoto = {
 	alt_description?: string;
 };
 
-export const useImageList = () => {
+export const useUnsplashContainer = () => {
 	const [photos, setPhotos] = useState<UnsplashPhoto[]>([]);
 
 	const getPhotosFromUnsplash = () => {

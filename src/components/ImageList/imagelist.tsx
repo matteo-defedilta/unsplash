@@ -1,9 +1,18 @@
-import { useImageList } from './useImageList';
 import * as S from './imagelist.style';
 
-export const ImageList = () => {
-	const { photos } = useImageList();
+type UnsplashPhoto = {
+	id: string;
+	urls: {
+		small: string;
+	};
+	alt_description?: string;
+};
 
+type ImageListProps = {
+	photos: Array<UnsplashPhoto>;
+};
+
+export const ImageList: React.FC<ImageListProps> = ({ photos }) => {
 	return photos.length !== 0 ? (
 		<div>
 			<S.ImageListWrapper>
