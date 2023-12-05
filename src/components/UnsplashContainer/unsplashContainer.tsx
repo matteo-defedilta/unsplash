@@ -2,10 +2,10 @@ import { Header, ImageList } from '../../components';
 import { useUnsplashContainer } from './useUnsplashContainer';
 
 export const UnsplashContainer = () => {
-	const { photos } = useUnsplashContainer();
+	const { photos, handleSearch } = useUnsplashContainer();
 	return (
 		<div>
-			<Header />
+			<Header search={handleSearch} />
 			<ImageList photos={photos} />
 		</div>
 	);

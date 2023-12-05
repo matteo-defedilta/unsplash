@@ -1,9 +1,13 @@
 import { UnsplashSVG } from '../../assets/Svgs';
 import * as S from './header.style';
-import { useState } from 'react';
+import { useHeader } from './useHeader';
 
-export const Header = () => {
-	const [searchInput, setsearchInput] = useState('');
+type HeaderProps = {
+	search: (searchInput: string) => void;
+};
+
+export const Header: React.FC<HeaderProps> = ({ search }) => {
+	const { searchInput, handleSearchImage } = useHeader(search);
 
 	return (
 		<>
@@ -12,7 +16,7 @@ export const Header = () => {
 				<S.StyledTitle>Unsplash</S.StyledTitle>
 				<S.StyledImageSearch
 					value={searchInput}
-					onChange={(e) => setsearchInput(e.target.value)}
+					onChange={(e) => handleSearchImage(e)}
 					type='text'
 					placeholder='cerca immagine'
 				/>

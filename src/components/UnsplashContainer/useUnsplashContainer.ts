@@ -11,25 +11,40 @@ type UnsplashPhoto = {
 
 export const useUnsplashContainer = () => {
 	const [photos, setPhotos] = useState<UnsplashPhoto[]>([]);
+	const [query, setQuery] = useState('');
 
-	const getPhotosFromUnsplash = () => {
-		unsplashApi
-			.get('', {
+	const getPhotosFromUnsplash = async (signal: AbortSignal) => {
+		try {
+			const response = await unsplashApi.get('', {
+				signal,
 				params: {
 					count: '10',
-					query: 'snow',
+					query: query,
 				},
-			})
-			.then((response) => {
-				const fetchedPhotos: UnsplashPhoto[] = response.data;
-				setPhotos(fetchedPhotos);
-			})
-			.catch((err) => console.error('Errore durante la richiesta API:', err));
+			});
+			const fetchedPhotos: UnsplashPhoto[] = response.data;
+			setPhotos(fetchedPhotos);
+		} catch (err) {
+			console.error('Errore durante la richiesta API:', err);
+		}
+	};
+
+	const handleSearch = (searchInput: string) => {
+		console.log(searchInput);
+		setQuery(searchInput);
 	};
 
 	useEffect(() => {
-		getPhotosFromUnsplash();
-	}, []);
+		const controller = new AbortController();
+		const signal = controller.signal;
 
-	return { photos };
+		getPhotosFromUnsplash(signal);
+
+		return () => {
+			controller.abort();
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [query]);
+
+	return { photos, handleSearch };
 };
