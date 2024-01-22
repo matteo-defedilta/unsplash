@@ -2,14 +2,7 @@ import { useEffect, useState } from 'react';
 import { unsplashApi } from '../../axios/instance';
 import useQueryParam from '../../utilities/useQueryParams';
 import { useDebounce } from 'use-debounce';
-
-type UnsplashPhoto = {
-	id: string;
-	urls: {
-		small: string;
-	};
-	alt_description?: string;
-};
+import { UnsplashPhoto } from '../ImageList/type';
 
 export const useUnsplashContainer = () => {
 	const [photos, setPhotos] = useState<UnsplashPhoto[]>([]);

@@ -3,7 +3,7 @@ import { ChangeEvent, useEffect, useState } from 'react';
 
 export const useHeader = (
 	search: (searchInput: string) => void,
-	params: string
+	params: string | null
 ) => {
 	const [searchInput, setsearchInput] = useState(
 		params != undefined ? params : ''

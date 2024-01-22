@@ -4,7 +4,7 @@ import { useHeader } from './useHeader';
 
 type HeaderProps = {
 	search: (searchInput: string) => void;
-	params: string;
+	params: string | null;
 };
 
 export const Header: React.FC<HeaderProps> = ({ search, params }) => {

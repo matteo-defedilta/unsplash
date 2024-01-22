@@ -4,18 +4,7 @@ import { useMemo } from 'react';
 
 import { Download } from './../../assets/Svgs/download';
 import { Loading } from '../../assets/Svgs';
-
-type UnsplashPhoto = {
-	id: string;
-	urls: {
-		small: string;
-		full: string;
-	};
-	links: {
-		download: string;
-	};
-	alt_description?: string;
-};
+import { UnsplashPhoto } from './type';
 
 type ImageListProps = {
 	photos: Array<UnsplashPhoto>;
