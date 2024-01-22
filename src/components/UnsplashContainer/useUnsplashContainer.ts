@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { unsplashApi } from '../../axios/instance';
+import useQueryParam from '../../utilities/useQueryParams';
 import { useDebounce } from 'use-debounce';
 
 type UnsplashPhoto = {
@@ -12,9 +13,10 @@ type UnsplashPhoto = {
 
 export const useUnsplashContainer = () => {
 	const [photos, setPhotos] = useState<UnsplashPhoto[]>([]);
-	const [query, setQuery] = useState('');
 	const [scroll, setScroll] = useState(0);
-	const [debouncedValue] = useDebounce(scroll, 500);
+	const [debouncedValue] = useDebounce(scroll, 200);
+
+	const { params, setQueryParams } = useQueryParam('');
 
 	const getPhotosFromUnsplash = async (signal: AbortSignal) => {
 		try {
@@ -22,7 +24,7 @@ export const useUnsplashContainer = () => {
 				signal,
 				params: {
 					count: 20,
-					query: query,
+					query: params,
 				},
 			});
 			const fetchedPhotos: UnsplashPhoto[] = response.data;
@@ -35,7 +37,7 @@ export const useUnsplashContainer = () => {
 	const handleSearch = (searchInput: string) => {
 		console.log(searchInput);
 		setPhotos([]);
-		setQuery(searchInput);
+		setQueryParams(searchInput);
 	};
 
 	window.addEventListener('scroll', function () {
@@ -60,7 +62,7 @@ export const useUnsplashContainer = () => {
 			controller.abort();
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [query, debouncedValue]);
+	}, [params, debouncedValue]);
 
-	return { photos, handleSearch };
+	return { photos, handleSearch, params };
 };

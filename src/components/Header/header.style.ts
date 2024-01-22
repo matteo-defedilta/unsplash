@@ -5,7 +5,7 @@ export const StyledHeader = styled.header`
 	align-items: center;
 	background-color: #141c22;
 	color: #687781;
-	padding: 0rem 2rem;
+	padding: 0rem 6rem;
 	gap: 1rem;
 `;
 

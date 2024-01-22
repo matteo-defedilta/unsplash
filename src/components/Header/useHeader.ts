@@ -1,8 +1,13 @@
 import { useDebounce } from 'use-debounce';
 import { ChangeEvent, useEffect, useState } from 'react';
 
-export const useHeader = (search: (searchInput: string) => void) => {
-	const [searchInput, setsearchInput] = useState('');
+export const useHeader = (
+	search: (searchInput: string) => void,
+	params: string
+) => {
+	const [searchInput, setsearchInput] = useState(
+		params != undefined ? params : ''
+	);
 	const [debouncedValue] = useDebounce(searchInput, 500);
 
 	const handleSearchImage = (e: ChangeEvent<HTMLInputElement>) => {

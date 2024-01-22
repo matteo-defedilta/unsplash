@@ -4,10 +4,11 @@ import { useHeader } from './useHeader';
 
 type HeaderProps = {
 	search: (searchInput: string) => void;
+	params: string;
 };
 
-export const Header: React.FC<HeaderProps> = ({ search }) => {
-	const { searchInput, handleSearchImage } = useHeader(search);
+export const Header: React.FC<HeaderProps> = ({ search, params }) => {
+	const { searchInput, handleSearchImage } = useHeader(search, params);
 
 	return (
 		<>

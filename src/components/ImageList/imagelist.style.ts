@@ -12,7 +12,7 @@ export const ImageListWrapper = styled.div`
 		}
 	}};
 	gap: 10px;
-	margin: 20px 100px;
+	margin: 1.25rem 6rem;
 `;
 
 export const ImageListContainer = styled.div`
@@ -32,7 +32,7 @@ export const ImageUrl = styled.button`
 
 export const ImageContainer = styled.div`
 	position: relative;
-	display: inline-block;
+	display: block;
 	&:hover {
 		${ImageUrl} {
 			display: block;

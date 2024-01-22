@@ -3,6 +3,7 @@ import { useDevice } from '../../utilities/useDevice';
 import { useMemo } from 'react';
 
 import { Download } from './../../assets/Svgs/download';
+import { Loading } from '../../assets/Svgs';
 
 type UnsplashPhoto = {
 	id: string;
@@ -60,37 +61,49 @@ export const ImageList: React.FC<ImageListProps> = ({ photos }) => {
 	return photos.length !== 0 ? (
 		<>
 			<S.ImageListWrapper className={`columns-${device}`}>
-				{Array.from({ length: columns }).map((_, columnIndex) => (
-					<S.ImageListContainer key={columnIndex} className='column'>
-						{photos.map((photo, photoIndex) => {
-							if (photoIndex % columns === columnIndex) {
-								return (
-									<S.ImageContainer>
-										<S.Image
-											key={photo.id}
-											src={photo.urls.small}
-											alt={photo.alt_description}
-										/>
-										<S.ImageUrl
-											onClick={() => {
-												downloadImage(photo.urls.full);
-											}}
-										>
-											<Download />
-										</S.ImageUrl>
-									</S.ImageContainer>
-								);
-							}
-							return null;
-						})}
-					</S.ImageListContainer>
-				))}
+				{Array.from({ length: columns }).map((_, columnIndex) => {
+					const id = Math.trunc(Math.random() * 10000);
+					return (
+						<S.ImageListContainer key={`${id}`} className='column'>
+							{photos.map((photo, photoIndex) => {
+								if (photoIndex % columns === columnIndex) {
+									return (
+										<S.ImageContainer>
+											<S.Image
+												key={photo.id}
+												src={photo.urls.small}
+												alt={photo.alt_description}
+											/>
+											<S.ImageUrl
+												onClick={() => {
+													downloadImage(photo.urls.full);
+												}}
+											>
+												<Download />
+											</S.ImageUrl>
+										</S.ImageContainer>
+									);
+								}
+								return null;
+							})}
+						</S.ImageListContainer>
+					);
+				})}
 			</S.ImageListWrapper>
 		</>
 	) : (
 		<>
-			{device}
-			<p>loading</p>
+			{/* {device} */}
+			<div
+				className='loadingContainer'
+				style={{
+					display: 'flex',
+					justifyContent: 'space-around',
+					marginTop: '2em',
+				}}
+			>
+				<Loading />
+			</div>
 		</>
 	);
 };
