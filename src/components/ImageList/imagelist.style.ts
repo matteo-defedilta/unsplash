@@ -33,6 +33,9 @@ export const ImageUrl = styled.button`
 export const ImageContainer = styled.div`
 	position: relative;
 	display: block;
+	overflow: hidden;
+	border-radius: 20px;
+
 	&:hover {
 		${ImageUrl} {
 			display: block;
@@ -44,4 +47,9 @@ export const Image = styled.img`
 	border-radius: 20px;
 	margin: 5px 0;
 	width: 100%;
+	transition: transform 0.2s;
+
+	&:hover {
+		transform: scale(1.05);
+	}
 `;

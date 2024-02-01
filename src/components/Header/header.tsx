@@ -2,6 +2,8 @@ import { UnsplashSVG } from '../../assets/Svgs';
 import * as S from './header.style';
 import { useHeader } from './useHeader';
 
+import { useThemeContext } from '../../context/ThemeContext';
+
 type HeaderProps = {
 	search: (searchInput: string) => void;
 	params: string | null;
@@ -9,6 +11,7 @@ type HeaderProps = {
 
 export const Header: React.FC<HeaderProps> = ({ search, params }) => {
 	const { searchInput, handleSearchImage } = useHeader(search, params);
+	const { setDarkTheme } = useThemeContext();
 
 	return (
 		<>
@@ -21,6 +24,9 @@ export const Header: React.FC<HeaderProps> = ({ search, params }) => {
 					type='text'
 					placeholder='cerca immagine'
 				/>
+				<S.StyledThemeButton onClick={() => setDarkTheme((theme) => !theme)}>
+					Change theme
+				</S.StyledThemeButton>
 			</S.StyledHeader>
 		</>
 	);
