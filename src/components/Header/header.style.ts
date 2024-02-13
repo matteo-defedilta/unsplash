@@ -7,10 +7,16 @@ export const StyledHeader = styled.header`
 	color: ${(props) => props.theme.borderColor};
 	padding: 0rem 6rem;
 	gap: 1rem;
+	@media (max-width: 768px) {
+		padding: 1rem;
+	}
 `;
 
 export const StyledTitle = styled.h1`
 	color: ${(props) => props.theme.borderColor};
+	@media (max-width: 768px) {
+		display: none;
+	}
 `;
 
 export const StyledImageSearch = styled.input`
@@ -27,8 +33,11 @@ export const StyledThemeButton = styled.button`
 	padding: 0.75rem;
 	margin: 0;
 	cursor: pointer;
-	background-color: ${(props) => props.theme.buttonBackground};
+	/* background-color: ${(props) => props.theme.buttonBackground};
 	border-color: ${(props) => props.theme.borderColor};
-	border-radius: 20px;
-	min-width: 150px;
+	border-radius: 20px; */
+	border: none;
+	svg {
+		width: 30px;
+	}
 `;

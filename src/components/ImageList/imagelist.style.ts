@@ -28,6 +28,7 @@ export const ImageUrl = styled.button`
 	text-decoration: none;
 	border: none;
 	display: none;
+	cursor: pointer;
 `;
 
 export const ImageContainer = styled.div`

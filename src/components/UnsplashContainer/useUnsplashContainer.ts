@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { unsplashApi } from '../../axios/instance';
 import useQueryParam from '../../utilities/useQueryParams';
-import { useDebounce } from 'use-debounce';
 import { UnsplashPhoto } from '../ImageList/type';
+import useDebounce from '../../utilities/useDebounce';
 
 export const useUnsplashContainer = () => {
 	const [photos, setPhotos] = useState<UnsplashPhoto[]>([]);
 	const [scroll, setScroll] = useState(0);
-	const [debouncedValue] = useDebounce(scroll, 200);
+	const { debouncedValue } = useDebounce(scroll, 200);
 
 	const { params, setQueryParams } = useQueryParam('');
 
