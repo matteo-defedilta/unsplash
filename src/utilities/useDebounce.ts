@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
-function useDebounce(value: number | string, delay: number) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function useDebounce(value: any, delay: number) {
 	const [debouncedValue, setDebouncedValue] = useState(value);
 
 	useEffect(() => {
