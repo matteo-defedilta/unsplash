@@ -11,6 +11,8 @@ export const useUnsplashContainer = () => {
 
 	const { params, setQueryParams } = useQueryParam('');
 
+	let scrollDelay = false;
+
 	const getPhotosFromUnsplash = async (signal: AbortSignal) => {
 		try {
 			const response = await unsplashApi.get('', {
@@ -33,26 +35,32 @@ export const useUnsplashContainer = () => {
 		setQueryParams(searchInput);
 	};
 
-	window.addEventListener('scroll', function () {
-		const maxHeight = document.body.scrollHeight - window.innerHeight;
-		const currentScroll = (window.pageYOffset * 100) / maxHeight;
-		//if over 70% of scroll height, call unsplash
-		if (currentScroll > 70) {
-			console.log('oltre il 70%');
-			setScroll((oldCount) => oldCount + 1);
-		}
-	});
-
 	useEffect(() => {
 		const controller = new AbortController();
 		const signal = controller.signal;
 
 		if (debouncedValue === scroll) {
 			getPhotosFromUnsplash(signal);
+			// eslint-disable-next-line react-hooks/exhaustive-deps
+			scrollDelay = false;
 		}
+
+		const handleScroll = () => {
+			const maxHeight = document.body.scrollHeight - window.innerHeight;
+			const currentScroll = (window.pageYOffset * 100) / maxHeight;
+			//if over 70% of scroll height, call unsplash
+			if (currentScroll > 70 && !scrollDelay) {
+				console.log('oltre il 70%');
+				setScroll((oldCount) => oldCount + 1);
+				scrollDelay = true;
+			}
+		};
+
+		window.addEventListener('scroll', handleScroll);
 
 		return () => {
 			controller.abort();
+			window.removeEventListener('scroll', handleScroll);
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [params, debouncedValue]);
