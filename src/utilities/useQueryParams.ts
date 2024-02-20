@@ -18,7 +18,10 @@ const useQueryParam = (paramName: string) => {
 			updatedParams.delete(paramName);
 		}
 
-		const newUrl = `${window.location.pathname}?${updatedParams.toString()}`;
+		let newUrl = `${window.location.pathname}`;
+		if (updatedParams.toString() != '') {
+			newUrl += `?${updatedParams.toString()}`;
+		}
 		window.history.replaceState({}, '', newUrl);
 	}, [paramName, params]);
 

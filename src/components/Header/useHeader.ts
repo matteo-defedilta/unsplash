@@ -12,7 +12,9 @@ export const useHeader = (
 	const { debouncedValue } = useDebounce(searchInput, 500);
 
 	const handleSearchImage = (e: ChangeEvent<HTMLInputElement>) => {
-		setsearchInput(e.target.value);
+		if (e.target.value != ' ') {
+			setsearchInput(e.target.value);
+		}
 	};
 
 	useEffect(() => {

@@ -13,6 +13,10 @@ export const ImageListWrapper = styled.div`
 	}};
 	gap: 10px;
 	margin: 1.25rem 6rem;
+
+	@media (max-width: 768px) {
+		margin: 1rem;
+	}
 `;
 
 export const ImageListContainer = styled.div`
